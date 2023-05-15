@@ -1,14 +1,12 @@
-﻿using EissenhowerMatrixBackend.DataBaseConnection.Models;
+﻿namespace EissenhowerMatrixBackend.DataBaseConnection;
+using EissenhowerMatrixBackend.DataBaseConnection.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EissenhowerMatrixBackend.DataBaseConnection
+public class TodoDb : DbContext
 {
-        class TodoDb : DbContext
-        {
-            public TodoDb(DbContextOptions<TodoDb> options)
-                : base(options) { }
+    public TodoDb(DbContextOptions<TodoDb> options)
+        : base(options) { }
 
-            public DbSet<Todo> Todos => Set<Todo>();
-        }
-
+    public DbSet<Todo> Todos => Set<Todo>();
 }
+
