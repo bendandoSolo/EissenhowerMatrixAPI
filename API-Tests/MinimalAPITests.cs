@@ -22,21 +22,25 @@ public class TodoControllerTests : IClassFixture<WebApplicationFactory<Program>>
                 });
             });
         });
+
+        // Get a service scope to get the TodoDb instance
+        var scope = _factory.Services.CreateScope();
+        TodoDb = scope.ServiceProvider.GetRequiredService<TodoDb>();
     }
 
     [Fact]
     public async Task TestGetTodoItems()
     {
         var client = _factory.CreateClient();
-        await SeedData(_factory.TodoDb);
+        await SeedData(TodoDb);
         var response = await client.GetAsync("/todoitems");
 
         response.EnsureSuccessStatusCode();
 
         var todoItems = await response.Content.ReadFromJsonAsync<Todo[]>();
 
-       //Assert.NotNull(todoItems);
-        //Assert.Equal(2, todoItems?.Length);
+       Assert.NotNull(todoItems);
+       Assert.Equal(2, todoItems?.Length);
     }
 
     [Fact]
