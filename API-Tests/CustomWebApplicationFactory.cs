@@ -3,6 +3,9 @@ using EissenhowerMatrixBackend.DataBaseConnection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.TestHost;
+using MediatR;
+using EissenhowerMatrixBackend.Handlers;
 
 namespace API_Tests;
 
@@ -15,7 +18,7 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureServices(services =>
+        builder.ConfigureTestServices(services =>
         {
             // Add a database context (AppDbContext) using an in-memory database for testing.
             services.AddDbContext<TodoDb>(options =>

@@ -116,15 +116,6 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         var getResponse = await client.GetAsync($"/todoitems/{id}");
         Assert.False(getResponse.IsSuccessStatusCode);
     }
-    //private async Task SeedData(TodoDb db)
-    //{
-    //    // Seed your test data here
-    //    db.Todos.AddRange(
-    //        new Todo { Id = 1, Name = "Task 1", Description = "Description 1" },
-    //        new Todo { Id = 2, Name = "Task 2", Description = "Description 2", CompletionDate = DateTime.Now }
-    //    );
-
-    //    await db.SaveChangesAsync();
-    //}
+   
 }
 

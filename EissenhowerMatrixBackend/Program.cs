@@ -1,6 +1,12 @@
 using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.DataBaseConnection.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using EissenhowerMatrixBackend.Queries;
+using Microsoft.AspNetCore.Builder;
+using System.Reflection;
+using EissenhowerMatrixBackend.Handlers;
 
 const string CorsPolicyName = "_myCorsPolicy";
 
@@ -9,6 +15,7 @@ builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList")
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(options
   => options.AddPolicy(name: CorsPolicyName, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTodoItemsHandler).Assembly));
 
 var app = builder.Build();
 
@@ -16,8 +23,21 @@ app.UseCors(CorsPolicyName);
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/todoitems", async (TodoDb db) =>
-    await db.Todos.ToListAsync());
+//app.MapGet("/todoitems", async (TodoDb db) =>
+//    await db.Todos.ToListAsync());
+
+//app.MapGet("/todoitems", async (IMediator mediator) =>
+//    await mediator.Send(new GetTodoItemsQuery()));
+
+//app.MapGet("/todoitems", async (HttpContext httpContext) =>
+//{
+//    var mediator = httpContext.RequestServices.GetRequiredService<IMediator>();
+//    return await mediator.Send(new GetTodoItemsQuery());
+//});
+app.MapGet("/todoitems", async (IMediator mediator) => await mediator.Send(new GetTodoItemsQuery()));
+
+//app.MapGet<List<Todo>>("/todoitems", async (IMediator mediator) =>
+//    await mediator.Send(new GetTodoItemsQuery()));
 
 app.MapGet("/todoitems/complete", async (TodoDb db) =>
     await db.Todos.Where(t => t.CompletionDate != null ).ToListAsync());
