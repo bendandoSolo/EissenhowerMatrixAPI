@@ -30,7 +30,6 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
     {
         // Arrange
         var client = _factory.CreateClient();
-        // await SeedData(TodoDb);
 
         // Act
         var response = await client.GetAsync("/todoitems/complete");
@@ -47,7 +46,6 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
     {
         // Arrange
         var client = _factory.CreateClient();
-        // await SeedData(TodoDb);
         var id = 1; // assuming you have an item with Id 1
 
         // Act
@@ -57,6 +55,7 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         response.EnsureSuccessStatusCode();
         var todoItem = await response.Content.ReadFromJsonAsync<Todo>();
         Assert.Equal(id, todoItem?.Id);
+        Assert.Equal("Task 1", todoItem?.Name);
     }
 
     [Fact]
@@ -103,8 +102,7 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
     {
         // Arrange
         var client = _factory.CreateClient();
-        // await SeedData(TodoDb);
-        var id = 1; // assuming you have an item with Id 1
+        var id = 1; 
 
         // Act
         var response = await client.DeleteAsync($"/todoitems/{id}");
