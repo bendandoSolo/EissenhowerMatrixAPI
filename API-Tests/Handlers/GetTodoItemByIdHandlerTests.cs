@@ -1,5 +1,4 @@
 ﻿using EissenhowerMatrixBackend.DataBaseConnection;
-using EissenhowerMatrixBackend.DataBaseConnection.Models;
 using EissenhowerMatrixBackend.Handlers;
 using EissenhowerMatrixBackend.Queries;
 

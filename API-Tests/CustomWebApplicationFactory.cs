@@ -1,5 +1,4 @@
-﻿using EissenhowerMatrixBackend.DataBaseConnection.Models;
-using EissenhowerMatrixBackend.DataBaseConnection;
+﻿using EissenhowerMatrixBackend.DataBaseConnection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;

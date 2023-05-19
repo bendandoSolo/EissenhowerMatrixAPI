@@ -26,12 +26,6 @@ app.MapGet("/", () => "Hello World!");
 
 app.MapGet("/todoitems", async (IMediator mediator) => await mediator.Send(new GetTodoItemsQuery()));
 
-//app.MapGet("/todoitems/{id}", async (int id, TodoDb db) =>
-//   await db.Todos.FindAsync(id)
-//       is Todo todo
-//           ? Results.Ok(todo)
-//           : Results.NotFound());
-
 app.MapGet("/todoitems/{id}", async (int id, IMediator mediator) => await mediator.Send(new GetTodoItemByIdQuery(id)).ToOkOrNotFound());
 
 app.MapGet("/todoitems/complete", async (TodoDb db) =>

@@ -9,7 +9,6 @@ using MediatR;
 using EissenhowerMatrixBackend.Queries;
 using EissenhowerMatrixBackend.Handlers;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using EissenhowerMatrixBackend.DataBaseConnection.Models;
 
 namespace API_Tests.Handlers
 {
