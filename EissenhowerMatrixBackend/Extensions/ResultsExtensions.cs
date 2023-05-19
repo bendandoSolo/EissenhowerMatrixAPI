@@ -1,5 +1,6 @@
 ﻿using EissenhowerMatrixBackend.DataBaseConnection.Models;
 using Microsoft.AspNetCore.Components.Forms;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace EissenhowerMatrixBackend.Extensions
@@ -19,7 +20,7 @@ namespace EissenhowerMatrixBackend.Extensions
             return ToOkOrNotFound(result);
         }
 
-        public static IResult ToTodoOrNotFound(this Todo result)
+        public static IResult ToTodoOrNotFound(this Todo? result)
         {
             if (result == null)
                 return Results.NotFound();
@@ -30,6 +31,19 @@ namespace EissenhowerMatrixBackend.Extensions
         {
             var result = await task;
             return ToTodoOrNotFound(result);
+        }
+
+        public static IResult ToNoContentOrNotFound(this Todo? result)
+        {
+            if (result == null)
+                return Results.NotFound();
+            return Results.NoContent();
+        }
+
+        public static async Task<IResult> ToNoContentOrNotFound(this Task<Todo?> task)
+        {
+            var result = await task;
+            return ToNoContentOrNotFound(result);
         }
 
     }

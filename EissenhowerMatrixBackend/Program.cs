@@ -31,30 +31,24 @@ app.MapGet("/todoitems/{id}", async (int id, IMediator mediator) => await mediat
 
 app.MapGet("/todoitems/complete", async (IMediator mediator) => await mediator.Send(new GetCompleteTodoItemsQuery()));
 
-//app.MapPost("/todoitems", async (Todo todo, TodoDb db) =>
-//{
-//    db.Todos.Add(todo);
-//    await db.SaveChangesAsync();
-
-//    return Results.Created($"/todoitems/{todo.Id}", todo);
-//});
-
 app.MapPost("/todoitems", async (Todo todo, IMediator mediator) => await mediator.Send(new PostTodoItemCommand(todo)).ToTodoOrNotFound());
 
-app.MapPut("/todoitems/{id}", async (int id, Todo inputTodo, TodoDb db) =>
-{
-    var todo = await db.Todos.FindAsync(id);
+//app.MapPut("/todoitems/{id}", async (int id, Todo inputTodo, TodoDb db) =>
+//{
+//    var todo = await db.Todos.FindAsync(id);
 
-    if (todo is null) return Results.NotFound();
+//    if (todo is null) return Results.NotFound();
 
-    todo.Name = inputTodo.Name;
-    todo.Description = inputTodo.Description;
-    todo.CompletionDate = inputTodo.CompletionDate;
+//    todo.Name = inputTodo.Name;
+//    todo.Description = inputTodo.Description;
+//    todo.CompletionDate = inputTodo.CompletionDate;
 
-    await db.SaveChangesAsync();
+//    await db.SaveChangesAsync();
 
-    return Results.NoContent();
-});
+//    return Results.NoContent();
+//});
+
+app.MapPut("/todoitems/{id}", async (int id, Todo todo, IMediator mediator) => await mediator.Send(new PutTodoItemCommand(id,todo)).ToNoContentOrNotFound());
 
 app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
 {

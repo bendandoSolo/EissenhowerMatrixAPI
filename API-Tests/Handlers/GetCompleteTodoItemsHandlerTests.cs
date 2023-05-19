@@ -5,7 +5,6 @@ using EissenhowerMatrixBackend.Queries;
 namespace API_Tests.Handlers;
     public class GetCompleteTodoItemsHandlerTests
     {
-
         [Fact]
         public async void ReturnsEmptyTodoItems_WhenDatabaseIsEmpty()
         {
@@ -34,7 +33,6 @@ namespace API_Tests.Handlers;
             // Assert
             Assert.Equal(1, todoItems?.Count);
         }
-
 
         private TodoDb CreateSUT(string dbName)
         {
