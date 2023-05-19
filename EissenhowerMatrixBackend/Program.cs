@@ -41,8 +41,6 @@ app.MapGet("/todoitems/complete", async (IMediator mediator) => await mediator.S
 
 app.MapPost("/todoitems", async (Todo todo, IMediator mediator) => await mediator.Send(new PostTodoItemCommand(todo)).ToTodoOrNotFound());
 
-
-
 app.MapPut("/todoitems/{id}", async (int id, Todo inputTodo, TodoDb db) =>
 {
     var todo = await db.Todos.FindAsync(id);
