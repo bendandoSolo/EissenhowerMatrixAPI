@@ -1,25 +1,11 @@
 ﻿using EissenhowerMatrixBackend.DataBaseConnection;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
-using EissenhowerMatrixBackend.Queries;
 using EissenhowerMatrixBackend.Handlers;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using EissenhowerMatrixBackend.Queries;
 
 namespace API_Tests.Handlers
 {
-   public class GetTodoItemsHandlerTests
+    public class GetTodoItemsHandlerTests
     {
-        //IMediator mediator;
-
-        //public GetTodoItemsHandlerTests(IMediator mediator)
-        //{
-        //    this.mediator = mediator;
-        //}
 
         [Fact]
         public async void ReturnsEmptyTodoItems_WhenDatabaseIsEmpty()
@@ -56,8 +42,8 @@ namespace API_Tests.Handlers
             var dbOptions = new DbContextOptionsBuilder<TodoDb>()
                                 .UseInMemoryDatabase(databaseName: "InMemoryTest")
                                 .Options;
-            
-           return new TodoDb(dbOptions);
+
+            return new TodoDb(dbOptions);
         }
 
         private async Task SeedData(TodoDb db)

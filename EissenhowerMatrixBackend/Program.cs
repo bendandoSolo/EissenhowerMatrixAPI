@@ -28,8 +28,10 @@ app.MapGet("/todoitems", async (IMediator mediator) => await mediator.Send(new G
 
 app.MapGet("/todoitems/{id}", async (int id, IMediator mediator) => await mediator.Send(new GetTodoItemByIdQuery(id)).ToOkOrNotFound());
 
-app.MapGet("/todoitems/complete", async (TodoDb db) =>
-    await db.Todos.Where(t => t.CompletionDate != null ).ToListAsync());
+//app.MapGet("/todoitems/complete", async (TodoDb db) =>
+//    await db.Todos.Where(t => t.CompletionDate != null ).ToListAsync());
+
+app.MapGet("/todoitems/complete", async (IMediator mediator) => await mediator.Send(new GetCompleteTodoItemsQuery()));
 
 app.MapPost("/todoitems", async (Todo todo, TodoDb db) =>
 {
