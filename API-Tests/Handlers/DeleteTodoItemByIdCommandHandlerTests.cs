@@ -1,6 +1,4 @@
-﻿
-using EissenhowerMatrixBackend.Comands;
-using EissenhowerMatrixBackend.Commands;
+﻿using EissenhowerMatrixBackend.Commands;
 using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Handlers;
 
@@ -21,7 +19,7 @@ namespace API_Tests.Handlers
             Todo? todoItem = await handler.Handle(new DeleteTodoItemByIdCommand(id), CancellationToken.None);
 
             // Assert
-            Assert.Equal(id, todoItem.Id);
+            Assert.Equal(id, todoItem?.Id);
         }
 
         private TodoDb CreateSUT()

@@ -10,11 +10,14 @@ using EissenhowerMatrixBackend.Handlers;
 using EissenhowerMatrixBackend.Extensions;
 using EissenhowerMatrixBackend.Comands;
 using EissenhowerMatrixBackend.Commands;
+using Microsoft.Extensions.Configuration;
 
 const string CorsPolicyName = "_myCorsPolicy";
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
+//builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList")); 
+builder.Services.AddDbContext<TodoDb>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(options
   => options.AddPolicy(name: CorsPolicyName, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
@@ -36,21 +39,7 @@ app.MapPost("/todoitems", async (Todo todo, IMediator mediator) => await mediato
 
 app.MapPut("/todoitems/{id}", async (int id, Todo todo, IMediator mediator) => await mediator.Send(new PutTodoItemCommand(id,todo)).ToNoContentOrNotFound());
 
-
-//app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
-//{
-//    if (await db.Todos.FindAsync(id) is Todo todo)
-//    {
-//        db.Todos.Remove(todo);
-//        await db.SaveChangesAsync();
-//        return Results.Ok(todo);
-//    }
-
-//    return Results.NotFound();
-//});
-
 app.MapDelete("/todoitems/{id}", async (int id, IMediator mediator) => await mediator.Send(new DeleteTodoItemByIdCommand(id)).ToOkOrNotFound());
-
 
 app.Run();
 
