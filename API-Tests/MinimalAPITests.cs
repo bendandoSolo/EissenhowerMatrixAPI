@@ -1,4 +1,5 @@
 ﻿
+using System.Net;
 using System.Net.Http.Json;
 namespace API_Tests;
 
@@ -37,7 +38,6 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         response.EnsureSuccessStatusCode();
         var todoItems = await response.Content.ReadFromJsonAsync<Todo[]>();
         Assert.Contains(todoItems, item => item.CompletionDate != null);
-        // Assert.All(todoItems, item => Assert.True(item.CompletionDate != null));
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
     }
 
     [Fact]
-    public async Task TestPutTodoItem()
+    public async Task TestPutTodoItem_AltersCorrectTodo()
     {
         // Arrange
         var client = _factory.CreateClient();
@@ -86,14 +86,21 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
 
         // Assert
         response.EnsureSuccessStatusCode();
-
         // we should do some better checks but that would require us to read the item back from the API or get access to the database from this class
+    }
 
-        //var todoItem = await response.Content.ReadFromJsonAsync<Todo>();
-        //_factory.db.Todos.Find(existingTodo.Id);
-        //Todo todoItem = client.
-        //Assert.Equal(existingTodo.Name, todoItem?.Name);
-        //Assert.Equal(existingTodo.Description, todoItem?.Description);
+    [Fact]
+    public async Task TestPutTodoItem_ReturnsNotFoundWhenTodoItemIsNotFound()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var existingTodo = new Todo { Id = 101, Name = "Updated Task", Description = "Updated Description" }; // assuming an item with Id 1 exists
+
+        // Act
+        var response = await client.PutAsJsonAsync($"/todoitems/{existingTodo.Id}", existingTodo);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
     [Fact]

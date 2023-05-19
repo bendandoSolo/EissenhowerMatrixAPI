@@ -2,7 +2,6 @@
 using EissenhowerMatrixBackend.Comands;
 using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Handlers;
-using EissenhowerMatrixBackend.Queries;
 
 namespace API_Tests.Handlers
 {
