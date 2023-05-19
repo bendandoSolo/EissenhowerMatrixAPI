@@ -1,4 +1,8 @@
-﻿namespace EissenhowerMatrixBackend.Extensions
+﻿using EissenhowerMatrixBackend.DataBaseConnection.Models;
+using Microsoft.AspNetCore.Components.Forms;
+using System.Threading.Tasks;
+
+namespace EissenhowerMatrixBackend.Extensions
 {
     public static class ResultsExtensions
     {
@@ -13,6 +17,19 @@
         {
             var result = await task;
             return ToOkOrNotFound(result);
+        }
+
+        public static IResult ToTodoOrNotFound(this Todo result)
+        {
+            if (result == null)
+                return Results.NotFound();
+            return Results.Created($"/todoitems/{result.Id}", result);
+        }
+
+        public static async Task<IResult> ToTodoOrNotFound(this Task<Todo?> task)
+        {
+            var result = await task;
+            return ToTodoOrNotFound(result);
         }
 
     }
