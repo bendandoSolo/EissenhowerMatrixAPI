@@ -106,6 +106,28 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
+    [Fact]
+    public async Task TestPutTodoItem_CanChangeEissenhowerStatus()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+        var id = 1;
+        var existingTodo = new Todo { Id = id, Name = "Updated Task", Description = "Updated Description", Priority = EissenhowerStatus.UrgentPriority }; // assuming an item with Id 1 exists
+
+        // Act
+        var response = await client.PutAsJsonAsync($"/todoitems/{existingTodo.Id}", existingTodo);
+
+        // Assert
+        response.EnsureSuccessStatusCode();
+
+        var getTodoItemResponse = await client.GetAsync($"/todoitems/{id}");
+        var updatedTodoItem = await getTodoItemResponse.Content.ReadFromJsonAsync<Todo>();
+        Assert.Equal(id, updatedTodoItem?.Id);
+
+        Assert.Equal(existingTodo.Priority, updatedTodoItem?.Priority);
+    }
+
+
     [Fact(Skip ="Deleting Todo is asynchronous and interferes with the other methods so should be done in a separate class")]
     public async Task TestDeleteTodoItem()
     {
