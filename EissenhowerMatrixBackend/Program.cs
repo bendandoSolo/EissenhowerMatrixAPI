@@ -15,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 const string CorsPolicyName = "_myCorsPolicy";
 
 var builder = WebApplication.CreateBuilder(args);
-//builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList")); 
+// builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList")); 
 builder.Services.AddDbContext<TodoDb>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

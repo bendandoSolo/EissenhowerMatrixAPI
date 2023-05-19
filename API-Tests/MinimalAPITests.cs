@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Routing;
 using System.Net;
 using System.Net.Http.Json;
 namespace API_Tests;
@@ -13,20 +14,23 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
     }
 
     [Fact]
-    public async Task CanGetAll_TodoItems()
+    public async Task GetAPI_CanGetNumberOfTodos()
     {
         var client = _factory.CreateClient();
         var response = await client.GetAsync("/todoitems");
 
         response.EnsureSuccessStatusCode();
 
+        System.Diagnostics.Debug.WriteLine(response.StatusCode );
+
         var todoItems = await response.Content.ReadFromJsonAsync<Todo[]>();
 
         Assert.NotNull(todoItems);
         Assert.Equal(2, todoItems?.Length);
     }
+
     [Fact]
-    public async Task GetAPI_CanGetAllTodos()
+    public async Task GetAPI_CanGetNumberOfCompleteTodos()
     {
         // Arrange
         var client = _factory.CreateClient();
@@ -108,7 +112,7 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
     {
         // Arrange
         var client = _factory.CreateClient();
-        var id = 1; 
+        var id = 1;
 
         // Act
         var response = await client.DeleteAsync($"/todoitems/{id}");
@@ -120,6 +124,6 @@ public class TodoControllerTests : IClassFixture<CustomWebApplicationFactory<Pro
         var getResponse = await client.GetAsync($"/todoitems/{id}");
         Assert.False(getResponse.IsSuccessStatusCode);
     }
-   
+
 }
 
