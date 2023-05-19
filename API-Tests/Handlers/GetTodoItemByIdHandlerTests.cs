@@ -13,7 +13,7 @@ namespace API_Tests.Handlers
             // Arrange
             var db = CreateSUT();
             await SeedData(db);
-            var handler = new GetTodoItemByIdHandler(db);
+            var handler = new GetTodoItemByIdQueryHandler(db);
 
             // Act
             Todo? todoItem = await handler.Handle(new GetTodoItemByIdQuery(1), CancellationToken.None);

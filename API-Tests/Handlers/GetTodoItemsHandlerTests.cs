@@ -12,7 +12,7 @@ namespace API_Tests.Handlers
         {
             // Arrange
             var db = CreateSUT();
-            var handler = new GetTodoItemsHandler(db);
+            var handler = new GetTodoItemsQueryHandler(db);
 
             // Act
             var todoItems = await handler.Handle(new GetTodoItemsQuery(), CancellationToken.None);
@@ -27,7 +27,7 @@ namespace API_Tests.Handlers
             // Arrange
             var db = CreateSUT();
             await SeedData(db);
-            var handler = new GetTodoItemsHandler(db);
+            var handler = new GetTodoItemsQueryHandler(db);
 
             // Act
             var todoItems = await handler.Handle(new GetTodoItemsQuery(), CancellationToken.None);

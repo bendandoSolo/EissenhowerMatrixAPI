@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EissenhowerMatrixBackend.Handlers;
 
-public class GetCompleteTodoItemsHandler : IRequestHandler<GetCompleteTodoItemsQuery, List<Todo>>
+public class GetCompleteTodoItemsQueryHandler : IRequestHandler<GetCompleteTodoItemsQuery, List<Todo>>
 {
     private readonly TodoDb _db;
 
-    public GetCompleteTodoItemsHandler(TodoDb db)
+    public GetCompleteTodoItemsQueryHandler(TodoDb db)
     {
         _db = db;
     }

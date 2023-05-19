@@ -4,11 +4,11 @@ using EissenhowerMatrixBackend.DataBaseConnection.Models;
 using EissenhowerMatrixBackend.Queries;
 using MediatR;
 
-public class GetTodoItemByIdHandler : IRequestHandler<GetTodoItemByIdQuery, Todo?>
+public class GetTodoItemByIdQueryHandler : IRequestHandler<GetTodoItemByIdQuery, Todo?>
 {
     private readonly TodoDb _db;
 
-    public GetTodoItemByIdHandler(TodoDb db)
+    public GetTodoItemByIdQueryHandler(TodoDb db)
     {
         _db = db;
     }
