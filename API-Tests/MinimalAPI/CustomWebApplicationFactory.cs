@@ -5,21 +5,20 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace API_Tests;
+namespace API_Tests.MinimalAPI;
 
 public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {
     public CustomWebApplicationFactory()
     {
-        this.ClientOptions.BaseAddress = new Uri("http://localhost/api");
+        ClientOptions.BaseAddress = new Uri("http://localhost/api");
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>
         {
-
-            // Add a database context (AppDbContext) using an in-memory database for testing.
+            // Add a database context (AppDbContext) using an in-memory database for testing, old method that failed !
             //services.AddDbContext<TodoDb>(options =>
             //{
             //    options.UseInMemoryDatabase("InMemoryTestDatabase");
