@@ -23,7 +23,5 @@ public class PostTodoItemCommandHandler : IRequestHandler<PostTodoItemCommand, T
         await _db.SaveChangesAsync();
 
         return todo;
-        //return Results.Created($"/todoitems/{todo.Id}", todo);
-        //return await _db.Todos.FindAsync(request.Id);
     }
 }
