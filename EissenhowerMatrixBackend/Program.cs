@@ -11,6 +11,7 @@ using EissenhowerMatrixBackend.Extensions;
 using EissenhowerMatrixBackend.Comands;
 using EissenhowerMatrixBackend.Commands;
 using Microsoft.Extensions.Configuration;
+using Scalar.AspNetCore;
 
 const string CorsPolicyName = "_myCorsPolicy";
 
@@ -22,6 +23,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(options
   => options.AddPolicy(name: CorsPolicyName, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTodoItemsQueryHandler).Assembly));
+//builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
