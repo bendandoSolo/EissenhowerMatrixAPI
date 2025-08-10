@@ -23,13 +23,33 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(options
   => options.AddPolicy(name: CorsPolicyName, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTodoItemsQueryHandler).Assembly));
-//builder.Services.AddOpenApi();
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
 app.UseCors(CorsPolicyName);
 
-app.MapGet("/", () => "Hello World!");
+// Configure the HTTP request pipeline.
+app.MapOpenApi();
+app.MapScalarApiReference(options => //https://localhost:7108/scalar/v1
+{
+    options
+        .WithTitle("Eissenhower Matrix API")
+        .WithTheme(ScalarTheme.BluePlanet)
+        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.Axios);
+    }
+);
+
+app.UseHttpsRedirection();
+
+app.MapGet("/", (IWebHostEnvironment env) =>
+{
+    if (env.IsDevelopment())
+    {
+        return Results.Redirect("/scalar/v1");
+    }
+    return Results.Ok("Eissenhower Matrix API - Production");
+});
 
 app.MapGet("/todoitems", async (IMediator mediator) => await mediator.Send(new GetTodoItemsQuery()));
 
