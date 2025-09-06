@@ -2,6 +2,7 @@
 using EissenhowerMatrixBackend.DataBaseConnection.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using EissenhowerMatrixBackend.Constants.Enums;
 
 public class TodoDb : DbContext
 {

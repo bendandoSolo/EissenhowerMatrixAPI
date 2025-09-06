@@ -12,6 +12,7 @@ using EissenhowerMatrixBackend.Comands;
 using EissenhowerMatrixBackend.Commands;
 using Microsoft.Extensions.Configuration;
 using Scalar.AspNetCore;
+using EissenhowerMatrixBackend.Models.ViewModels;
 
 const string CorsPolicyName = "_myCorsPolicy";
 
@@ -57,7 +58,7 @@ app.MapGet("/todoitems/{id}", async (int id, IMediator mediator) => await mediat
 
 app.MapGet("/todoitems/complete", async (IMediator mediator) => await mediator.Send(new GetCompleteTodoItemsQuery()));
 
-app.MapPost("/todoitems", async (Todo todo, IMediator mediator) => await mediator.Send(new PostTodoItemCommand(todo)).ToTodoOrNotFound());
+app.MapPost("/todoitems", async (CreateTodoViewModel createTodoView, IMediator mediator) => await mediator.Send(new PostTodoItemCommand(createTodoView)).ToTodoOrNotFound());
 
 app.MapPut("/todoitems/{id}", async (int id, Todo todo, IMediator mediator) => await mediator.Send(new PutTodoItemCommand(id,todo)).ToNoContentOrNotFound());
 
