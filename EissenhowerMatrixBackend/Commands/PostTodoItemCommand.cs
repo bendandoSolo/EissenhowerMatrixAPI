@@ -1,4 +1,4 @@
-﻿using EissenhowerMatrixBackend.DataBaseConnection.Models;
+﻿using EissenhowerMatrixBackend.Models;
 using EissenhowerMatrixBackend.Models.ViewModels;
 using MediatR;
 

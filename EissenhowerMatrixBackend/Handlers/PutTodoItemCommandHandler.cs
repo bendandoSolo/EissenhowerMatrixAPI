@@ -1,7 +1,7 @@
 ﻿
 using EissenhowerMatrixBackend.Comands;
 using EissenhowerMatrixBackend.DataBaseConnection;
-using EissenhowerMatrixBackend.DataBaseConnection.Models;
+using EissenhowerMatrixBackend.Models;
 using MediatR;
 
 namespace EissenhowerMatrixBackend.Handlers;

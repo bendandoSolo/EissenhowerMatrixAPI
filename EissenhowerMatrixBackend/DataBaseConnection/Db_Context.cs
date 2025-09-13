@@ -1,9 +1,8 @@
 ﻿namespace EissenhowerMatrixBackend.DataBaseConnection;
-using EissenhowerMatrixBackend.DataBaseConnection.Models;
+using EissenhowerMatrixBackend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using EissenhowerMatrixBackend.Constants.Enums;
-
 public class TodoDb : DbContext
 {
     public TodoDb(DbContextOptions<TodoDb> options)
@@ -17,5 +16,7 @@ public class TodoDb : DbContext
     }
 
     public DbSet<Todo> Todos => Set<Todo>();
+
+    public DbSet<Project> Projects => Set<Project>();
 }
 

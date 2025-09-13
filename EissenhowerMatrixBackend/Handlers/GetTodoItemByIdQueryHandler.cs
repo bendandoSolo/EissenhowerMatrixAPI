@@ -1,6 +1,6 @@
 ﻿namespace EissenhowerMatrixBackend.Handlers;
 using EissenhowerMatrixBackend.DataBaseConnection;
-using EissenhowerMatrixBackend.DataBaseConnection.Models;
+using EissenhowerMatrixBackend.Models;
 using EissenhowerMatrixBackend.Queries;
 using MediatR;
 

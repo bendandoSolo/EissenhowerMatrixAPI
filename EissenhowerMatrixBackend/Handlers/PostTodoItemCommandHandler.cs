@@ -1,7 +1,7 @@
 ﻿
 using EissenhowerMatrixBackend.Comands;
 using EissenhowerMatrixBackend.DataBaseConnection;
-using EissenhowerMatrixBackend.DataBaseConnection.Models;
+using EissenhowerMatrixBackend.Models;
 using EissenhowerMatrixBackend.Models.ViewModels;
 using EissenhowerMatrixBackend.Queries;
 using MediatR;

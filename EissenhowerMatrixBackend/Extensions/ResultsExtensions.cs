@@ -1,4 +1,4 @@
-﻿using EissenhowerMatrixBackend.DataBaseConnection.Models;
+﻿using EissenhowerMatrixBackend.Models;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Security.Cryptography;
 using System.Threading.Tasks;

@@ -1,8 +1,9 @@
-﻿using MediatR.NotificationPublishers;
-
-namespace EissenhowerMatrixBackend.DataBaseConnection.Models;
+﻿namespace EissenhowerMatrixBackend.Models;
 
 using EissenhowerMatrixBackend.Constants.Enums;
+using Microsoft.Identity.Client;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 public class Todo
 {
@@ -12,7 +13,14 @@ public class Todo
     public DateTime? CompletionDate { get; set; } = null;
     public EissenhowerStatus Priority { get; set; } = EissenhowerStatus.Unassigned;
     public bool ToBuyOrGet { get; set; } = false;
-    
+
+    public long ProjectId { get; set; }
+
+    [JsonIgnore]
+    [ForeignKey(nameof(ProjectId))]
+    public Project? Project { get; set; }
+
+
     // TODO: add a list of subtasks, and a list of follow up tasks,
     // add reoccuring todo's automatically recreated after time period. 
     //follow up tasks, such as when completed check your account in one week etc?
