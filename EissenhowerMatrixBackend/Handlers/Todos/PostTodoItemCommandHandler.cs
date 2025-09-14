@@ -1,12 +1,11 @@
-﻿
-using EissenhowerMatrixBackend.Comands;
-using EissenhowerMatrixBackend.DataBaseConnection;
+﻿using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Models;
 using EissenhowerMatrixBackend.Models.ViewModels;
-using EissenhowerMatrixBackend.Queries;
+using EissenhowerMatrixBackend.Requests.Queries;
+using EissenhowerMatrixBackend.Requests.Commands.Todos;
 using MediatR;
 
-namespace EissenhowerMatrixBackend.Handlers;
+namespace EissenhowerMatrixBackend.Handlers.Todos;
 public class PostTodoItemCommandHandler : IRequestHandler<PostTodoItemCommand, Todo?>
 {
     private readonly TodoDb _db;

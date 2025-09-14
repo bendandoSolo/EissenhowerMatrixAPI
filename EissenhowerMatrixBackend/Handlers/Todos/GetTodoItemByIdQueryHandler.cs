@@ -1,7 +1,7 @@
-﻿namespace EissenhowerMatrixBackend.Handlers;
+﻿namespace EissenhowerMatrixBackend.Handlers.Todos;
 using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Models;
-using EissenhowerMatrixBackend.Queries;
+using EissenhowerMatrixBackend.Requests.Queries.Todos;
 using MediatR;
 
 public class GetTodoItemByIdQueryHandler : IRequestHandler<GetTodoItemByIdQuery, Todo?>

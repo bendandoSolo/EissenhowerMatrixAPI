@@ -1,18 +1,14 @@
 using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Models;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
-using EissenhowerMatrixBackend.Queries;
-using Microsoft.AspNetCore.Builder;
-using System.Reflection;
-using EissenhowerMatrixBackend.Handlers;
+using EissenhowerMatrixBackend.Requests.Queries.Todos;
 using EissenhowerMatrixBackend.Extensions;
-using EissenhowerMatrixBackend.Comands;
-using EissenhowerMatrixBackend.Commands;
-using Microsoft.Extensions.Configuration;
+using EissenhowerMatrixBackend.Requests.Commands.Todos;
 using Scalar.AspNetCore;
+using EissenhowerMatrixBackend.Handlers.Projects;
 using EissenhowerMatrixBackend.Models.ViewModels;
+using EissenhowerMatrixBackend.Handlers.Todos;
 
 const string CorsPolicyName = "_myCorsPolicy";
 
@@ -52,6 +48,8 @@ app.MapGet("/", (IWebHostEnvironment env) =>
     return Results.Ok("Eissenhower Matrix API - Production");
 });
 
+
+//Todos API Endpoints
 app.MapGet("/todoitems", async (IMediator mediator) => await mediator.Send(new GetTodoItemsQuery()));
 
 app.MapGet("/todoitems/{id}", async (int id, IMediator mediator) => await mediator.Send(new GetTodoItemByIdQuery(id)).ToOkOrNotFound());
@@ -63,6 +61,12 @@ app.MapPost("/todoitems", async (CreateTodoViewModel createTodoView, IMediator m
 app.MapPut("/todoitems/{id}", async (int id, Todo todo, IMediator mediator) => await mediator.Send(new PutTodoItemCommand(id,todo)).ToNoContentOrNotFound());
 
 app.MapDelete("/todoitems/{id}", async (int id, IMediator mediator) => await mediator.Send(new DeleteTodoItemByIdCommand(id)).ToOkOrNotFound());
+
+
+//Project API endpoints
+//app.MapGet("/projects", async (IMediator mediator) => await mediator.Send(new GetAllProjectsQueryHandler()));
+
+
 
 app.Run();
 

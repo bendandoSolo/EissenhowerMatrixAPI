@@ -1,7 +1,5 @@
 ﻿namespace EissenhowerMatrixBackend.Models;
 
-using EissenhowerMatrixBackend.Models;
-
 public class Project
 {
     public int Id { get; set; }

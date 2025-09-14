@@ -1,10 +1,10 @@
 ﻿using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Models;
-using EissenhowerMatrixBackend.Queries;
+using EissenhowerMatrixBackend.Requests.Queries.Todos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace EissenhowerMatrixBackend.Handlers;
+namespace EissenhowerMatrixBackend.Handlers.Todos;
 
 public class GetCompleteTodoItemsQueryHandler : IRequestHandler<GetCompleteTodoItemsQuery, List<Todo>>
 {

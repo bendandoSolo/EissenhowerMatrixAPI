@@ -2,6 +2,6 @@
 using EissenhowerMatrixBackend.Models.ViewModels;
 using MediatR;
 
-namespace EissenhowerMatrixBackend.Comands;
+namespace EissenhowerMatrixBackend.Requests.Commands.Todos;
 
 public record PostTodoItemCommand(CreateTodoViewModel todoViewModel) : IRequest<Todo?>;

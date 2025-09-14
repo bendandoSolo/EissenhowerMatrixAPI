@@ -1,10 +1,9 @@
-﻿
-namespace EissenhowerMatrixBackend.Handlers;
+﻿namespace EissenhowerMatrixBackend.Handlers.Todos;
 
-using EissenhowerMatrixBackend.Commands;
 using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Models;
-using EissenhowerMatrixBackend.Queries;
+using EissenhowerMatrixBackend.Requests.Queries;
+using EissenhowerMatrixBackend.Requests.Commands.Todos;
 using MediatR;
 
 public class DeleteTodoItemByIdCommandHandler : IRequestHandler<DeleteTodoItemByIdCommand, Todo?>

@@ -16,7 +16,6 @@ public class TodoDb : DbContext
     }
 
     public DbSet<Todo> Todos => Set<Todo>();
-
     public DbSet<Project> Projects => Set<Project>();
 }
 

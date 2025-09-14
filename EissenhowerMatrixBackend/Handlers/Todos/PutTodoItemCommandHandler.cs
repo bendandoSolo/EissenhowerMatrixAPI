@@ -1,10 +1,9 @@
-﻿
-using EissenhowerMatrixBackend.Comands;
-using EissenhowerMatrixBackend.DataBaseConnection;
+﻿using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Models;
+using EissenhowerMatrixBackend.Requests.Commands.Todos;
 using MediatR;
 
-namespace EissenhowerMatrixBackend.Handlers;
+namespace EissenhowerMatrixBackend.Handlers.Todos;
 public class PutTodoItemCommandHandler : IRequestHandler<PutTodoItemCommand, Todo?>
 {
     private readonly TodoDb _db;
