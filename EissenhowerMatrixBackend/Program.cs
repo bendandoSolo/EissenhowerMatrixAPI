@@ -1,14 +1,16 @@
 using EissenhowerMatrixBackend.DataBaseConnection;
-using EissenhowerMatrixBackend.Models;
-using Microsoft.EntityFrameworkCore;
-using MediatR;
-using EissenhowerMatrixBackend.Requests.Queries.Todos;
 using EissenhowerMatrixBackend.Extensions;
-using EissenhowerMatrixBackend.Requests.Commands.Todos;
-using Scalar.AspNetCore;
-using EissenhowerMatrixBackend.Requests.Queries.Projects;
-using EissenhowerMatrixBackend.Models.ViewModels;
+using EissenhowerMatrixBackend.Handlers.Projects;
 using EissenhowerMatrixBackend.Handlers.Todos;
+using EissenhowerMatrixBackend.Models;
+using EissenhowerMatrixBackend.Models.ViewModels;
+using EissenhowerMatrixBackend.Requests.Commands.Todos;
+using EissenhowerMatrixBackend.Requests.Queries.Projects;
+using EissenhowerMatrixBackend.Requests.Queries.Todos;
+using MediatR;
+using EissenhowerMatrixBackend.Requests.Commands.Projects;
+using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 const string CorsPolicyName = "_myCorsPolicy";
 
@@ -19,7 +21,7 @@ builder.Services.AddDbContext<TodoDb>(opt => opt.UseSqlServer(builder.Configurat
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddCors(options
   => options.AddPolicy(name: CorsPolicyName, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTodoItemsQueryHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTodoItemsHandler).Assembly));
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -65,6 +67,8 @@ app.MapDelete("/todoitems/{id}", async (int id, IMediator mediator) => await med
 
 //Project API endpoints
 app.MapGet("/projects", async (IMediator mediator) => await mediator.Send(new GetAllProjectsQuery()));
+
+app.MapPost("/projects", async (CreateProjectViewModel createProjectModel, IMediator mediator) => await mediator.Send(new CreateProjectCommandRequest(createProjectModel)).ToProjectOrNotFound());
 
 
 

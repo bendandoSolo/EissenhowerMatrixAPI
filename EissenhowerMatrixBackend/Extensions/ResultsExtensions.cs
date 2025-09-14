@@ -46,5 +46,18 @@ namespace EissenhowerMatrixBackend.Extensions
             return ToNoContentOrNotFound(result);
         }
 
+        public static IResult ToProjectOrNotFound(this Project? result)
+        {
+            if (result == null)
+                return Results.NotFound();
+            return Results.Created($"/todoitems/{result.Id}", result);
+        }
+
+        public static async Task<IResult> ToProjectOrNotFound(this Task<Project?> task)
+        {
+            var result = await task;
+            return ToProjectOrNotFound(result);
+        }
+
     }
 }

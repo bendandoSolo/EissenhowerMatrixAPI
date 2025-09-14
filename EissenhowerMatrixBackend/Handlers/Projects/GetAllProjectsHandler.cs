@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EissenhowerMatrixBackend.Handlers.Projects
 {
-    public class GetAllProjectsQueryHandler : IRequestHandler<GetAllProjectsQuery, List<Project>>
+    public class GetAllProjectsHandler : IRequestHandler<GetAllProjectsQuery, List<Project>>
     {
         private readonly TodoDb _db;
 
-        public GetAllProjectsQueryHandler(TodoDb db)
+        public GetAllProjectsHandler(TodoDb db)
         {
             _db = db;
         }

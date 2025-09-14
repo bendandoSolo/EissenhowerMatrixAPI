@@ -19,8 +19,4 @@
     <PackageReference Include="Scalar.AspNetCore" Version="2.6.8" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Requests\Commands\Projects\" />
-  </ItemGroup>
-
 </Project>
