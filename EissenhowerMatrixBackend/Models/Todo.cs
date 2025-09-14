@@ -14,7 +14,8 @@ public class Todo
     public EissenhowerStatus Priority { get; set; } = EissenhowerStatus.Unassigned;
     public bool ToBuyOrGet { get; set; } = false;
 
-    public long ProjectId { get; set; }
+    // maybe null if not associated with project
+    public int? ProjectId { get; set; }
 
     [JsonIgnore]
     [ForeignKey(nameof(ProjectId))]
