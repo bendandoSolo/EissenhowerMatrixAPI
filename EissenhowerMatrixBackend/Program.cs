@@ -6,7 +6,7 @@ using EissenhowerMatrixBackend.Requests.Queries.Todos;
 using EissenhowerMatrixBackend.Extensions;
 using EissenhowerMatrixBackend.Requests.Commands.Todos;
 using Scalar.AspNetCore;
-using EissenhowerMatrixBackend.Handlers.Projects;
+using EissenhowerMatrixBackend.Requests.Queries.Projects;
 using EissenhowerMatrixBackend.Models.ViewModels;
 using EissenhowerMatrixBackend.Handlers.Todos;
 
@@ -64,7 +64,7 @@ app.MapDelete("/todoitems/{id}", async (int id, IMediator mediator) => await med
 
 
 //Project API endpoints
-//app.MapGet("/projects", async (IMediator mediator) => await mediator.Send(new GetAllProjectsQueryHandler()));
+app.MapGet("/projects", async (IMediator mediator) => await mediator.Send(new GetAllProjectsQuery()));
 
 
 

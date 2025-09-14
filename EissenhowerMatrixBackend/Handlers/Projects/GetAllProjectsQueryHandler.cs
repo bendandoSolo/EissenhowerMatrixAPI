@@ -1,10 +1,13 @@
 ﻿using EissenhowerMatrixBackend.DataBaseConnection;
 using EissenhowerMatrixBackend.Models;
 using Microsoft.EntityFrameworkCore;
+using EissenhowerMatrixBackend.Requests.Queries.Projects;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace EissenhowerMatrixBackend.Handlers.Projects
 {
-    public class GetAllProjectsQueryHandler
+    public class GetAllProjectsQueryHandler : IRequestHandler<GetAllProjectsQuery, List<Project>>
     {
         private readonly TodoDb _db;
 
@@ -13,7 +16,7 @@ namespace EissenhowerMatrixBackend.Handlers.Projects
             _db = db;
         }
 
-        public async Task<List<Project>> Handle(GetAllProjectsQueryHandler request, CancellationToken cancellationToken)
+        public async Task<List<Project>> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
         {
             return await _db.Projects.ToListAsync(cancellationToken);
         }
