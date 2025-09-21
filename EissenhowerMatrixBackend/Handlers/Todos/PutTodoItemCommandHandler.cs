@@ -23,6 +23,7 @@ public class PutTodoItemCommandHandler : IRequestHandler<PutTodoItemCommand, Tod
         todo.Description = request.todo.Description;
         todo.CompletionDate = request.todo.CompletionDate;
         todo.Priority = request.todo.Priority;
+        todo.ProjectId = request.todo.ProjectId;
         await _db.SaveChangesAsync();
 
         return todo;

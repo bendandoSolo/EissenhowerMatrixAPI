@@ -25,6 +25,7 @@ public class PostTodoItemCommandHandler : IRequestHandler<PostTodoItemCommand, T
             Description = createTodoView.Description,
             Priority = createTodoView.Priority,
             ToBuyOrGet = createTodoView.ToBuyOrGet,
+            ProjectId = createTodoView.ProjectId,
         };
 
         _db.Todos.Add(newTodo);
