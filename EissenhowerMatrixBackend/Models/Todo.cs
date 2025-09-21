@@ -14,6 +14,9 @@ public class Todo
     public EissenhowerStatus Priority { get; set; } = EissenhowerStatus.Unassigned;
     public bool ToBuyOrGet { get; set; } = false;
 
+    public bool PersonToContact { get; set; } = false;
+
+    public bool PersonWaitingOn { get; set; } = false;
     // maybe null if not associated with project
     public int? ProjectId { get; set; }
 
