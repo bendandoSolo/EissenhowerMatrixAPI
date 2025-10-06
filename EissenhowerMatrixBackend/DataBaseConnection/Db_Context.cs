@@ -13,6 +13,10 @@ public class TodoDb : DbContext
         modelBuilder.Entity<Todo>()
             .Property(e => e.Priority)
             .HasConversion(new EnumToStringConverter<EissenhowerStatus>());
+
+        // Global query filter for soft-deleted projects
+        modelBuilder.Entity<Project>()
+            .HasQueryFilter(p => p.Deleted == null);
     }
 
     public DbSet<Todo> Todos => Set<Todo>();

@@ -70,7 +70,7 @@ app.MapGet("/projects", async (IMediator mediator) => await mediator.Send(new Ge
 
 app.MapPost("/projects", async (CreateProjectViewModel createProjectModel, IMediator mediator) => await mediator.Send(new CreateProjectCommandRequest(createProjectModel)).ToProjectOrNotFound());
 
-
+app.MapDelete("/projects/{id}", async (int id, IMediator mediator) => await mediator.Send(new DeleteProjectByIdCommand(id)).ToOkOrNotFound());
 
 app.Run();
 

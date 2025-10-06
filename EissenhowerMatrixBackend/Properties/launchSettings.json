@@ -1,4 +1,6 @@
 ﻿{
+  "launchBrowser": true,
+  "launchUrl": "scalar",
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
